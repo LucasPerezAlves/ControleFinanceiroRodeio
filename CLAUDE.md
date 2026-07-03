@@ -379,3 +379,14 @@ de madeira), zero cor crua do Tailwind (só tokens), zero `rounded-2xl`,
 `frontend/src/components/ui/` (`Botao`, `Alerta`, `Modal`, `Avatar`,
 `SeloCaixa`). O checklist pre-flight do DESIGN-SYSTEM.md roda mecanicamente
 por grep e deve continuar zerado em toda tela nova.
+
+## Pendências Técnicas
+
+- **Avatar do rodapé da sidebar do Admin sempre mostra a silhueta.**
+  `PerfilUsuario` (`frontend/src/lib/auth.tsx`) ainda não expõe `foto_url` —
+  `RodapeUsuario` em `frontend/src/components/navigation/Sidebar.tsx` chama
+  `Avatar` com `fotoUrl={null}` hardcoded. Resolver exige estender
+  `buscarPerfil` para trazer `foto_url` de `perfis_funcionarios` e propagar
+  pelo `AuthContext`. Não é regressão (o header antigo do Admin nem exibia
+  foto), mas o Master Admin com foto cadastrada continua vendo o fallback
+  genérico até isso ser feito.
