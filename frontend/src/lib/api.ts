@@ -76,6 +76,33 @@ export interface FuncionarioApi {
   ativo: boolean;
 }
 
+export interface ValorVigenteApi {
+  /** null quando é o valor global (sem área específica). */
+  areaTrabalho: string | null;
+  valorHora: number;
+  vigenciaInicio: string;
+  alteradoPorAdminId: string;
+  alteradoPorNome: string;
+}
+
+export interface ValorHoraAtualApi {
+  /** null quando nenhum admin configurou um valor global ainda. */
+  global: ValorVigenteApi | null;
+  overridesPorArea: ValorVigenteApi[];
+}
+
+export interface HistoricoValorHoraApi {
+  id: string;
+  escopo: "GLOBAL" | "AREA";
+  areaTrabalho: string | null;
+  valorHora: number;
+  vigenciaInicio: string;
+  vigenciaFim: string | null;
+  ativo: boolean;
+  alteradoPorAdminId: string;
+  alteradoPorNome: string;
+}
+
 export class ApiError extends Error {
   constructor(
     public readonly status: number,
@@ -257,4 +284,34 @@ export function listarCaixasAbertos(): Promise<CaixaApi[]> {
 /** Exclusivo do Admin — Scorecard de Divergência de Operadores. */
 export function listarCaixasFechados(): Promise<CaixaApi[]> {
   return request<CaixaApi[]>("/api/caixas/fechados", "GET") as Promise<CaixaApi[]>;
+}
+
+/** Exclusivo do Admin — estado efetivo atual (valor global + overrides por área). */
+export function buscarValoresHora(): Promise<ValorHoraAtualApi> {
+  return request<ValorHoraAtualApi>("/api/valores-hora", "GET") as Promise<ValorHoraAtualApi>;
+}
+
+/** Exclusivo do Admin — histórico completo (vigências fechadas e ativas). */
+export function buscarHistoricoValoresHora(): Promise<HistoricoValorHoraApi[]> {
+  return request<HistoricoValorHoraApi[]>("/api/valores-hora/historico", "GET") as Promise<
+    HistoricoValorHoraApi[]
+  >;
+}
+
+/**
+ * Exclusivo do Admin — salva o valor global e a lista completa de overrides
+ * por área (payload substitui o estado inteiro; o back-end versiona só o
+ * que mudou).
+ */
+export function salvarValoresHora(dados: {
+  valorHoraGlobalCentavos: number;
+  overrides: Array<{ area: string; valorHoraCentavos: number }>;
+}): Promise<ValorHoraAtualApi> {
+  return request<ValorHoraAtualApi>("/api/valores-hora", "PUT", {
+    valorHoraGlobal: centavosParaReais(dados.valorHoraGlobalCentavos),
+    overrides: dados.overrides.map((item) => ({
+      area: item.area,
+      valorHora: centavosParaReais(item.valorHoraCentavos),
+    })),
+  }) as Promise<ValorHoraAtualApi>;
 }
