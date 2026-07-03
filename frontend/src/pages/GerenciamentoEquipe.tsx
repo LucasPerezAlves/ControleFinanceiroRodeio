@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import DashboardLayout from "../components/DashboardLayout";
 import OperadorCard from "../components/equipe/OperadorCard";
 import FecharCaixaModal from "../components/equipe/FecharCaixaModal";
 import SangriaModal from "../components/equipe/SangriaModal";
@@ -11,7 +9,7 @@ import {
   type DadosLimites,
   type Operador,
 } from "../hooks/useGerenciamentoEquipe";
-import { LivroCaixaIcon, SearchIcon, SetaEsquerdaIcon } from "../components/icons";
+import { LivroCaixaIcon, SearchIcon } from "../components/icons";
 import Alerta from "../components/ui/Alerta";
 import Avatar from "../components/ui/Avatar";
 import Botao from "../components/ui/Botao";
@@ -250,17 +248,9 @@ export default function GerenciamentoEquipe() {
   }
 
   return (
-    <DashboardLayout titulo="Gerenciamento de Equipe">
-      <Link
-        to="/admin-dashboard"
-        className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-gold-300 transition-colors duration-200 hover:text-gold-200"
-      >
-        <SetaEsquerdaIcon className="h-4 w-4" />
-        Voltar ao painel
-      </Link>
-
+    <>
       <div className="flex items-center justify-between gap-4">
-        <h2 className="font-display text-2xl text-gold-300">Equipe do evento</h2>
+        <h1 className="font-display text-2xl text-gold-300 md:text-3xl">Equipe do evento</h1>
         {!carregando && (
           <p className="num-tabular text-sm text-steel-400">
             {operadores.length} de {totalOperadores} operador(es)
@@ -374,6 +364,6 @@ export default function GerenciamentoEquipe() {
           onCancelar={() => setOperadorParaLimites(null)}
         />
       )}
-    </DashboardLayout>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./lib/auth";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminLayout from "./components/AdminLayout";
 import AuthPage from "./pages/AuthPage";
 import AdminLandingPage from "./pages/AdminLandingPage";
 import AdminAbrirCaixa from "./pages/AdminAbrirCaixa";
@@ -25,38 +26,20 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AuthPage />} />
+          {/* Módulo administrativo: um único guardião + AdminLayout (sidebar
+              permanente); cada módulo novo é só mais um <Route> filho aqui. */}
           <Route
-            path="/admin-dashboard"
             element={
               <ProtectedRoute perfisPermitidos={["MASTER_ADMIN"]}>
-                <AdminLandingPage />
+                <AdminLayout />
               </ProtectedRoute>
             }
-          />
-          <Route
-            path="/admin-dashboard/abrir-caixa"
-            element={
-              <ProtectedRoute perfisPermitidos={["MASTER_ADMIN"]}>
-                <AdminAbrirCaixa />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin-dashboard/equipe"
-            element={
-              <ProtectedRoute perfisPermitidos={["MASTER_ADMIN"]}>
-                <GerenciamentoEquipe />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin-dashboard/scorecard"
-            element={
-              <ProtectedRoute perfisPermitidos={["MASTER_ADMIN"]}>
-                <AdminScorecard />
-              </ProtectedRoute>
-            }
-          />
+          >
+            <Route path="/admin-dashboard" element={<AdminLandingPage />} />
+            <Route path="/admin-dashboard/abrir-caixa" element={<AdminAbrirCaixa />} />
+            <Route path="/admin-dashboard/equipe" element={<GerenciamentoEquipe />} />
+            <Route path="/admin-dashboard/scorecard" element={<AdminScorecard />} />
+          </Route>
           <Route
             path="/operador-dashboard"
             element={

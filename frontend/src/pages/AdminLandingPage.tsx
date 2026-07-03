@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import DashboardLayout from "../components/DashboardLayout";
 import {
   DistintivoIcon,
   HorseshoeIcon,
@@ -23,10 +22,10 @@ const NO_CURRAL = [
  */
 export default function AdminLandingPage() {
   return (
-    <DashboardLayout titulo="Painel da Gerência">
-      <h2 className="font-display text-2xl text-gold-300 md:text-3xl">
+    <>
+      <h1 className="font-display text-2xl text-gold-300 md:text-3xl">
         Visão geral da arena
-      </h2>
+      </h1>
       <p className="mt-1 text-[15px] text-leather-300">
         Somente o Master Admin enxerga os valores reais consolidados.
       </p>
@@ -109,6 +108,6 @@ export default function AdminLandingPage() {
           ))}
         </ul>
       </section>
-    </DashboardLayout>
+    </>
   );
 }

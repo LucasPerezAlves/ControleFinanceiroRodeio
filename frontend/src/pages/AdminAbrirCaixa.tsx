@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import DashboardLayout from "../components/DashboardLayout";
 import AberturaCaixa from "../components/pdv/AberturaCaixa";
 import { useAdminAbrirCaixa, type OperadorParaAbertura } from "../hooks/useAdminAbrirCaixa";
 import { SetaEsquerdaIcon } from "../components/icons";
@@ -33,14 +32,10 @@ export default function AdminAbrirCaixa() {
   }
 
   return (
-    <DashboardLayout titulo="Abrir Caixa">
-      <Link
-        to="/admin-dashboard"
-        className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-gold-300 transition-colors duration-200 hover:text-gold-200"
-      >
-        <SetaEsquerdaIcon className="h-4 w-4" />
-        Voltar ao painel
-      </Link>
+    <>
+      <h1 className="mb-6 font-display text-2xl text-gold-300 md:text-3xl">
+        Abrir Caixa
+      </h1>
 
       {erro && (
         <Alerta tipo="erro" className="mb-6" onDispensar={limparErro}>
@@ -170,6 +165,6 @@ export default function AdminAbrirCaixa() {
           </div>
         </div>
       )}
-    </DashboardLayout>
+    </>
   );
 }

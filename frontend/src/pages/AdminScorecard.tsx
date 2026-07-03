@@ -1,6 +1,4 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import DashboardLayout from "../components/DashboardLayout";
 import Alerta from "../components/ui/Alerta";
 import Avatar from "../components/ui/Avatar";
 import FiltroArea from "../components/ui/FiltroArea";
@@ -8,7 +6,7 @@ import { Carregando } from "../components/ui/interacoes";
 import { useScorecard, type OperadorScorecard } from "../hooks/useScorecard";
 import { extrairAreasDisponiveis } from "../hooks/useGerenciamentoEquipe";
 import { formatarCentavos } from "../lib/moeda";
-import { LivroCaixaIcon, PlacaIcon, SetaEsquerdaIcon } from "../components/icons";
+import { LivroCaixaIcon, PlacaIcon } from "../components/icons";
 
 /** Card do operador: histórico de fechamentos + divergência acumulada + padrão a investigar. */
 function ScorecardCard({ operador }: { operador: OperadorScorecard }) {
@@ -81,19 +79,11 @@ export default function AdminScorecard() {
   );
 
   return (
-    <DashboardLayout titulo="Scorecard de Operadores">
-      <Link
-        to="/admin-dashboard"
-        className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-gold-300 transition-colors duration-200 hover:text-gold-200"
-      >
-        <SetaEsquerdaIcon className="h-4 w-4" />
-        Voltar ao painel
-      </Link>
-
-      <h2 className="flex items-center gap-3 font-display text-2xl text-gold-300">
+    <>
+      <h1 className="flex items-center gap-3 font-display text-2xl text-gold-300 md:text-3xl">
         <LivroCaixaIcon className="h-6 w-6 text-gold-400" />
         Histórico de divergência
-      </h2>
+      </h1>
       <p className="mt-1 text-[15px] text-leather-300">
         Sobra e falta de cada operador nos fechamentos já feitos, com alerta de padrão recorrente.
       </p>
@@ -141,6 +131,6 @@ export default function AdminScorecard() {
           ))}
         </div>
       )}
-    </DashboardLayout>
+    </>
   );
 }
