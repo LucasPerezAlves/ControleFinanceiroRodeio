@@ -164,6 +164,11 @@ export default {
           "60%": { opacity: "1", transform: "translateY(1px) scale(1.01)" },
           "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
         },
+        // Porteira deslizando: entrada do drawer de navegação no mobile
+        "porteira-abre": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
       },
       animation: {
         "dust-rise": "dust-rise 14s linear infinite",
@@ -177,6 +182,7 @@ export default {
         "ferradura-acende": "ferradura-acende 0.5s ease-out both",
         "pulso-latao": "pulso-latao 2.4s ease-in-out infinite",
         "malote-guarda": "malote-guarda 0.45s cubic-bezier(0.32, 0.72, 0, 1) both",
+        "porteira-abre": "porteira-abre 0.3s cubic-bezier(0.32, 0.72, 0, 1) both",
       },
       // Curvas de transição customizadas (ver DESIGN-SYSTEM.md § Animação)
       transitionTimingFunction: {

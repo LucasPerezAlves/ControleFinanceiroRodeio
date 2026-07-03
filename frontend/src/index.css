@@ -148,7 +148,8 @@
   .animate-lampiao,
   .animate-ferradura-acende,
   .animate-pulso-latao,
-  .animate-malote-guarda {
+  .animate-malote-guarda,
+  .animate-porteira-abre {
     animation: none;
   }
 
