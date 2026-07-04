@@ -27,6 +27,12 @@ export interface CaixaApi {
   divergencia: number | null;
   /** Nível de numerário em espécie (regra de negócio nº 2) — nunca bloqueia venda. */
   nivelAlerta: NivelAlertaNumerario;
+  /** Controle de jornada operacional: null enquanto o caixa está ABERTO. */
+  minutosTrabalhados: number | null;
+  /** Snapshot imutável do valor/hora vigente no fechamento — null se não configurado. */
+  valorHoraAplicado: number | null;
+  /** minutosTrabalhados/60 * valorHoraAplicado — null se valorHoraAplicado for null. */
+  valorTotalCalculado: number | null;
 }
 
 export interface VendaApi {
