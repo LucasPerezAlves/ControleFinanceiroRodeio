@@ -45,13 +45,15 @@ function descricaoEvento(evento: EventoAtividade): string {
 
 /** Timeline mesclada de 4 tipos de evento reais, mais recente primeiro, com stagger "galope" na entrada. */
 export default function ActivityFeed({ eventos }: { eventos: EventoAtividade[] }) {
+  const eventosRecentes = eventos.slice(0, 15);
+
   return (
     <DashboardSection titulo="Atividade Recente" icone={LivroCaixaIcon}>
       {eventos.length === 0 ? (
         <p className="text-sm text-leather-300">Nenhum evento registrado ainda.</p>
       ) : (
         <ul className="space-y-3">
-          {eventos.map((evento, indice) => (
+          {eventosRecentes.map((evento, indice) => (
             <li
               key={evento.id}
               className="flex items-center gap-3 animate-fade-in-up"
