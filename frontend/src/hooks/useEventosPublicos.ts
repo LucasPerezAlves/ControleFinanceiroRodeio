@@ -49,6 +49,7 @@ export function useEventoPublico(slug: string | undefined) {
       setCarregando(true);
       setErro(null);
       setNaoEncontrado(false);
+      setEvento(null);
       try {
         const resultado = await buscarEventoPublicoPorSlug(slugAtual);
         if (!cancelado) setEvento(resultado);
