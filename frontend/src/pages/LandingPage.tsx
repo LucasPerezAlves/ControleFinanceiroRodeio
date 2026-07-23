@@ -17,6 +17,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-dvh bg-arena-950">
+      <h1 className="sr-only">Velho Promoções — Rodeios e eventos</h1>
       <LandingHeader />
       <LandingHero />
       <main className="mx-auto max-w-5xl px-4 py-12 sm:px-8">
@@ -28,11 +29,11 @@ export default function LandingPage() {
         )}
         {carregando ? (
           <Carregando rotulo="Carregando eventos..." />
-        ) : (
+        ) : !erro ? (
           <div className="mt-6">
             <EventosPublicosGrid eventos={eventos} />
           </div>
-        )}
+        ) : null}
       </main>
       <SecaoInstitucional />
       <LandingFooter />
