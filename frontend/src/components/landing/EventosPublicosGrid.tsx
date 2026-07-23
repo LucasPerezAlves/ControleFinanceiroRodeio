@@ -33,7 +33,7 @@ export default function EventosPublicosGrid({ eventos }: { eventos: EventoPublic
           <div className="aspect-video w-full overflow-hidden bg-arena-900">
             {(evento.imagemDestaqueUrl || evento.bannerUrl) && (
               <img
-                src={evento.imagemDestaqueUrl ?? evento.bannerUrl ?? undefined}
+                src={evento.imagemDestaqueUrl || evento.bannerUrl || undefined}
                 alt={evento.nome}
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
